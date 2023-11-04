@@ -3,6 +3,7 @@
     public class ProductDto
     {
         public Guid Id { get; set; }
+        public Category.CategoryDto Category { get; set; }
         public Guid CategoryId { get; set; }
         public string Name { get; set; }
         public int Price { get; set; }

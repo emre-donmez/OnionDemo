@@ -16,6 +16,11 @@ namespace OnionDemo.Persistence.src.Data
             builder.Property(c => c.CategoryId).HasColumnName("FK_CATEGORY_ID");
             builder.Property(c => c.Created).HasColumnName("DT_CREATED");
             builder.Property(c => c.IsDel).HasColumnName("SW_DEL");
+
+            builder.HasOne(p => p.Category)
+            .WithMany(c => c.Products)
+            .HasForeignKey(p => p.CategoryId)
+            .HasConstraintName("FK_Product_Category");
         }
     }
 }

@@ -11,7 +11,7 @@
     <table class="table">
         <tr>
             <th>Id</th>
-            <th>Category Id</th>
+            <th>Category</th>
             <th>Name</th>
             <th>Price</th>
             <th>Description</th>
@@ -22,7 +22,7 @@
         {
                     <tr>
                         <td>@product.Id</td>
-                        <td>@product.CategoryId</td>
+                        <td>@product.Category.Name</td>
                         <td>@product.Name</td>
                         <td>@product.Price</td>
                         <td>@product.Description</td>
@@ -46,9 +46,8 @@
     <h1>Disabled Products</h1>
     <table class="table">
         <tr>
-            <th>Id</th>
-            <th>Category Id</th>
             <th>Name</th>
+            <th>Category</th>            
             <th>Price</th>
             <th>Description</th>
             <th>Created</th>
@@ -57,9 +56,8 @@
         @foreach (var product in Model.Where(x => x.IsDel == true).ToList())
         {
                     <tr>
-                        <td>@product.Id</td>
-                        <td>@product.CategoryId</td>
                         <td>@product.Name</td>
+                        <td>@product.Category.Name</td>                        
                         <td>@product.Price</td>
                         <td>@product.Description</td>
                         <td>@product.Created</td>
@@ -69,7 +67,6 @@
                                 <input type="submit" value="Enable" class="btn btn-primary" />
                             </form>
                         </td>
-
                     </tr>
         }
     </table>

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using OnionDemo.Application.Abstractions.Category;
 using OnionDemo.Application.Abstractions.Product;
 using OnionDemo.Application.Abstractions.src.Services;
@@ -25,8 +26,7 @@ namespace OnionDemo.Application.src.Product
 
         public Task<List<ProductDto>> GetProducts()
         {
-            var products = this.context.Products.ToList();
-
+            var products = this.context.Products.Include(p => p.Category).ToList();
 
             var mappingResult = this.mapper.Map<List<Domain.Product.Product> ,List<ProductDto>> (products);
 
@@ -64,14 +64,6 @@ namespace OnionDemo.Application.src.Product
 
             return Task.FromResult(product);
         }
-
-        //public void ProductEnable(int id)
-        //{
-        //    Domain.src.Product.Product product = _context.Products.Where(product => product.Id == id).FirstOrDefault();
-        //    product.Enabled = true;
-        //    _context.Update(product);
-        //    _context.SaveChanges();
-        //}
 
         public Task<ProductDto> Disable(Guid id)
         {

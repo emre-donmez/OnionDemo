@@ -1,4 +1,5 @@
 ﻿using OnionDemo.Domain.Entities.Common;
+using OnionDemo.Domain.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace OnionDemo.Domain.Category
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        public ICollection<Product.Product> Products { get; set; }
+
     }
 }
