@@ -1,0 +1,77 @@
+﻿@model List<OnionDemo.MVC.Models.ApiProductGetResponseModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product List</title>
+</head>
+<body>
+    <a asp-action="Action">New Product</a>
+    <h1>Active Products</h1>
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Category Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Created</th>
+            <th>Process</th>
+        </tr>
+        @foreach (var product in Model.Where(x => x.IsDel == false))
+        {
+                    <tr>
+                        <td>@product.Id</td>
+                        <td>@product.CategoryId</td>
+                        <td>@product.Name</td>
+                        <td>@product.Price</td>
+                        <td>@product.Description</td>
+                        <td>@product.Created</td>
+                        <td>
+                            <form asp-action="Action" method="get" asp-controller="Product">
+                                <input name="id" hidden value="@product.Id" class="form-control" />
+                                <input type="submit" value="Update" class="btn btn-primary" />
+                            </form>
+                        </td>
+                        <td>
+                    <form asp-action="Disable" method="post" asp-controller="Product">
+                        <input name="id" hidden value="@product.Id" class="form-control" />
+                        <input type="submit" value="Disable" class="btn btn-primary" />
+                            </form>
+                        </td>
+                    </tr>
+        }
+    </table>
+
+    <h1>Disabled Products</h1>
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Category Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Created</th>
+            <th>Process</th>
+        </tr>
+        @foreach (var product in Model.Where(x => x.IsDel == true).ToList())
+        {
+                    <tr>
+                        <td>@product.Id</td>
+                        <td>@product.CategoryId</td>
+                        <td>@product.Name</td>
+                        <td>@product.Price</td>
+                        <td>@product.Description</td>
+                        <td>@product.Created</td>
+                        <td>
+                            <form asp-action="Enable" method="post" asp-controller="Product">
+                        <input name="id" hidden value="@product.Id" class="form-control" />
+                                <input type="submit" value="Enable" class="btn btn-primary" />
+                            </form>
+                        </td>
+
+                    </tr>
+        }
+    </table>
+</body>
+</html>
