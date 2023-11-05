@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OnionDemo.Domain.Category;
-using OnionDemo.Domain.Product;
+using OnionDemo.Domain;
 using OnionDemo.Persistence.src.Data;
 
 namespace OnionDemo.Persistence.src.Context.Main

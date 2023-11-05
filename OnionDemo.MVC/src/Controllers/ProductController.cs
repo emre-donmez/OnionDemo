@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using OnionDemo.Application.Abstractions.Product;
-using OnionDemo.Domain.Product;
 using OnionDemo.MVC.Models;
 using OnionDemo.MVC.src.Helpers;
 namespace OnionDemo.MVC.Controllers
@@ -32,9 +31,11 @@ namespace OnionDemo.MVC.Controllers
             if (id != Guid.Empty)
             {
                var response = await apiRequestHelper.PostAsync<ApiProductGetResponseModel>(ApiEndpoints.GetProductByIdEndpoint, new {Id=id});
-               productViewModel = this.mapper.Map<ApiProductGetResponseModel, ProductViewModel>(response);
+               productViewModel = this.mapper.Map<ProductViewModel>(response);
             }
-            return View(productViewModel);
+            var categories = await apiRequestHelper.GetAsync<List<ApiCategoryGetResponseModel>>(ApiEndpoints.GetCategoriesEndPoint);
+
+            return View((productViewModel,categories));
         }
 
         [HttpPost]
@@ -63,7 +64,6 @@ namespace OnionDemo.MVC.Controllers
 
             return RedirectToAction("Index");
         }
-
 
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OnionDemo.Domain.Product;
+using OnionDemo.Domain;
 
 namespace OnionDemo.Persistence.src.Data
 {
@@ -18,9 +18,9 @@ namespace OnionDemo.Persistence.src.Data
             builder.Property(c => c.IsDel).HasColumnName("SW_DEL");
 
             builder.HasOne(p => p.Category)
-            .WithMany(c => c.Products)
+            .WithMany()
             .HasForeignKey(p => p.CategoryId)
-            .HasConstraintName("FK_Product_Category");
+            .HasConstraintName("FK_Product_Category");         
         }
     }
 }

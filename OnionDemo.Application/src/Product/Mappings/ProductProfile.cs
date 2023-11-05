@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using OnionDemo.Application.Abstractions.Product;
-using OnionDemo.Domain.Product;
 
 namespace OnionDemo.Application.src.Product.Mappings
 {
@@ -8,7 +7,7 @@ namespace OnionDemo.Application.src.Product.Mappings
     {
         public ProductProfile()
         {
-            this.CreateMap<Domain.Product.Product, ProductDto>().ReverseMap();
+            this.CreateMap<Domain.Product, ProductDto>().ReverseMap();
         }
     }
 }

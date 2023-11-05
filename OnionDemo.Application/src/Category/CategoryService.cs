@@ -1,25 +1,26 @@
-﻿using OnionDemo.Application.Abstractions.src.Category;
+﻿using AutoMapper;
+using OnionDemo.Application.Abstractions.Category;
 using OnionDemo.Persistence.src.Context.Main;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OnionDemo.Application.src.Category
+namespace OnionDemo.Application.Category
 {
     public class CategoryService : ICategoryService
     {
-        public readonly MainDbContext _context;
-        public CategoryService(MainDbContext context) 
+        private readonly MainDbContext context;
+        private readonly IMapper mapper;
+        
+        public CategoryService(MainDbContext context, IMapper mapper) 
         { 
-            _context = context;
+            this.context = context;
+            this.mapper = mapper;
         }
-        public List<Domain.Category.Category> GetCategories()
+        public Task<List<CategoryDto>> GetCategories()
         {
-            List<Domain.Category.Category> categories = new List<Domain.Category.Category>();
-            categories = _context.Categories.ToList();
-            return categories;
+            var categories = this.context.Categories.ToList();
+
+            var mappingResult = this.mapper.Map<List<CategoryDto>>(categories);
+
+            return Task.FromResult(mappingResult);
         }
     }
 }

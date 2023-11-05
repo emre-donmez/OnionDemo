@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OnionDemo.Domain.Category;
+using OnionDemo.Domain;
 
 namespace OnionDemo.Persistence.src.Data
 {

@@ -1,17 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using OnionDemo.Application.Abstractions.Category;
 using OnionDemo.Application.Abstractions.Product;
-using OnionDemo.Application.Abstractions.src.Services;
-using OnionDemo.Domain.Product;
+using OnionDemo.Application.Abstractions.Services;
 using OnionDemo.Persistence.src.Context.Main;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OnionDemo.Application.src.Product
+namespace OnionDemo.Application.Product
 {
     public class ProductService : IProductService
     {
@@ -28,7 +21,7 @@ namespace OnionDemo.Application.src.Product
         {
             var products = this.context.Products.Include(p => p.Category).ToList();
 
-            var mappingResult = this.mapper.Map<List<Domain.Product.Product> ,List<ProductDto>> (products);
+            var mappingResult = this.mapper.Map<List<ProductDto>> (products);
 
             return Task.FromResult(mappingResult);
         }
@@ -36,7 +29,7 @@ namespace OnionDemo.Application.src.Product
         {
             var product = this.context.Products.Find(id);
 
-            var mappingResult = this.mapper.Map<Domain.Product.Product,ProductDto> (product);
+            var mappingResult = this.mapper.Map<ProductDto> (product);
 
             return Task.FromResult(mappingResult);
 
@@ -47,7 +40,7 @@ namespace OnionDemo.Application.src.Product
             product.Created = DateTime.Now;
             product.IsDel = false;
 
-            var mappingResult = this.mapper.Map<ProductDto, Domain.Product.Product>(product);
+            var mappingResult = this.mapper.Map<Domain.Product>(product);
 
             this.context.Products.Add(mappingResult);
             this.context.SaveChanges();
@@ -57,7 +50,7 @@ namespace OnionDemo.Application.src.Product
 
         public Task<ProductDto> Update(ProductDto product)
         {            
-            var mappingResult = this.mapper.Map<ProductDto, Domain.Product.Product>(product);
+            var mappingResult = this.mapper.Map<Domain.Product>(product);
             
             this.context.Products.Update(mappingResult);
             this.context.SaveChanges();
@@ -67,24 +60,25 @@ namespace OnionDemo.Application.src.Product
 
         public Task<ProductDto> Disable(Guid id)
         {
-            Domain.Product.Product product = context.Products.Find(id);
+            Domain.Product product = context.Products.Find(id);
             product.IsDel = true;
+
             context.Update(product);
             context.SaveChanges();
 
-            var mappingResult = this.mapper.Map<Domain.Product.Product, ProductDto>(product);
+            var mappingResult = this.mapper.Map<ProductDto>(product);
 
             return Task.FromResult(mappingResult);
         }
 
         public Task<ProductDto> Enable(Guid id)
         {
-            Domain.Product.Product product = context.Products.Find(id);
+            Domain.Product product = context.Products.Find(id);
             product.IsDel = false;
             context.Update(product);
             context.SaveChanges();
 
-            var mappingResult = this.mapper.Map<Domain.Product.Product, ProductDto>(product);
+            var mappingResult = this.mapper.Map<ProductDto>(product);
 
             return Task.FromResult(mappingResult);
         }

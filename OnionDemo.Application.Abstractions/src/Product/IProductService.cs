@@ -1,7 +1,6 @@
-﻿
-using OnionDemo.Application.Abstractions.Product;
+﻿using OnionDemo.Application.Abstractions.Product;
 
-namespace OnionDemo.Application.Abstractions.src.Services
+namespace OnionDemo.Application.Abstractions.Services
 {
     public interface IProductService
     {

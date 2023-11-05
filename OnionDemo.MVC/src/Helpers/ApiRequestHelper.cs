@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System.Text.Json;
 using System.Text;
 using JsonSerializer = System.Text.Json.JsonSerializer;
-using System.Net.Http.Headers;
-using System.Net.Http;
-using System;
 
 namespace OnionDemo.MVC.src.Helpers
 {

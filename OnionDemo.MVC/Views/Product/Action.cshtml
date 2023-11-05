@@ -1,6 +1,6 @@
-﻿@model OnionDemo.MVC.Models.ProductViewModel
+﻿@model (OnionDemo.MVC.Models.ProductViewModel , List<OnionDemo.MVC.Models.ApiCategoryGetResponseModel>)
 @{
-    string dmlType = Model.Id == Guid.Empty ? "C" : "U";
+    string dmlType = Model.Item1.Id == Guid.Empty ? "C" : "U";
 }
 <h1> @(dmlType == "U" ? "Update" : "Create")</h1>
 
@@ -8,27 +8,38 @@
 <div class="row">
     <div class="col-md-4">        
         <form asp-action="Action">
-            <input hidden name="Id" value="@Model.Id"/>
-            <input hidden name="Created" value="@Model.Created" />
+            <input hidden name="Id" value="@Model.Item1.Id"/>
+            <input hidden name="Created" value="@Model.Item1.Created" />
             <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                <input asp-for="CategoryId" value="@Model.CategoryId" class="form-control" />
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="Item1.Name" class="control-label"></label>
+                    <input name="Name" value="@Model.Item1.Name" class="form-control" />
+                    <span asp-validation-for="Item1.Name" class="text-danger"></span>
+                </div>
+                <label  class="control-label"> Category</label>
+                    <select name="CategoryId" class="form-control">
+                    @foreach (var item in Model.Item2)
+                    {
+                        if (item.Id == Model.Item1.CategoryId)
+                        {
+                          <option value="@item.Id" selected>@item.Name</option>
+                        }
+                        else
+                        {
+                           <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+                    </select>
+            </div>            
+            <div class="form-group">
+                <label asp-for="Item1.Price" class="control-label"></label>
+                <input name="Price" value="@Model.Item1.Price" class="form-control" />
+                <span asp-validation-for="Item1.Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" value="@Model.Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" value="@Model.Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" value="@Model.Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="Item1.Description" class="control-label"></label>
+                <input name="Description" value="@Model.Item1.Description" class="form-control" />
+                <span asp-validation-for="Item1.Description" class="text-danger"></span>
             </div>            
          
             <div class="form-group">

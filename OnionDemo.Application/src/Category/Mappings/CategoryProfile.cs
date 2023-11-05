@@ -7,7 +7,7 @@ namespace OnionDemo.Application.src.Category.Mappings
     {
         public CategoryProfile() 
         {
-            this.CreateMap<Domain.Category.Category, CategoryDto>().ReverseMap();
+            this.CreateMap<Domain.Category, CategoryDto>().ReverseMap();
         }
     }
 }

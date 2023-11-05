@@ -12,6 +12,9 @@
         public const string DisableProductEndpoint = ProductEndpoint + "Disable";
         public const string EnableProductEndpoint = ProductEndpoint + "Enable";
 
+        public const string CategoryEndPoint = BaseEndpoint + "Category/";
+        public const string GetCategoriesEndPoint = CategoryEndPoint + "GetCategories";
+
 
     }
 }
