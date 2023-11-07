@@ -60,7 +60,7 @@ namespace OnionDemo.Application.Product
 
         public Task<ProductDto> Disable(Guid id)
         {
-            Domain.Product product = context.Products.Find(id);
+            var product = context.Products.Find(id);
             product.IsDel = true;
 
             context.Update(product);
@@ -73,7 +73,7 @@ namespace OnionDemo.Application.Product
 
         public Task<ProductDto> Enable(Guid id)
         {
-            Domain.Product product = context.Products.Find(id);
+            var product = context.Products.Find(id);
             product.IsDel = false;
             context.Update(product);
             context.SaveChanges();

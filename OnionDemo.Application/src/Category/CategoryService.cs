@@ -22,5 +22,29 @@ namespace OnionDemo.Application.Category
 
             return Task.FromResult(mappingResult);
         }
+
+        public Task<CategoryDto> Create(CategoryDto category)
+        {
+            category.Id = Guid.NewGuid();
+            category.Created = DateTime.Now;
+            category.IsDel = false;
+
+            var mappingResult = this.mapper.Map<Domain.Category>(category);
+
+            this.context.Categories.Add(mappingResult);
+            this.context.SaveChanges();
+
+            return Task.FromResult(category);
+        }
+
+        public Task<CategoryDto> Update(CategoryDto category)
+        {
+            var mappingResult = this.mapper.Map<Domain.Category>(category);
+
+            this.context.Categories.Update(mappingResult);
+            this.context.SaveChanges();
+
+            return Task.FromResult(category);
+        }
     }
 }
