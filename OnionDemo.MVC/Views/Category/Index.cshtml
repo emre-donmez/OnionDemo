@@ -1,0 +1,50 @@
+﻿@model List<OnionDemo.MVC.Models.ApiCategoryGetResponseModel>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Category List</title>
+    <link href="/css/model.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>Category List</h1>
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-primary mx-2 open-modal" data-modal-id="modal">New Product</button>
+
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close" data-modal-id="modal">&times;</span>
+                <partial name="_Action" model="new ApiCategoryGetResponseModel()" />
+            </div>
+        </div>
+
+    </div>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Created</th>
+            <th>Process</th>
+        </tr>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.Name</td>
+                <td>@category.Description</td>
+                <td>@category.Created</td>
+                <td>
+                    <button class="btn btn-primary mx-2 open-modal" data-modal-id="modal-@category.Id">Update</button>
+
+                    <div id="modal-@category.Id" class="modal">
+                        <div class="modal-content">
+                            <span class="close" data-modal-id="modal-@category.Id">&times;</span>
+                            <partial name="_Action" model="category" />
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+        }
+    </table>
+    <script src="/js/model.js"></script>
+</body>
+</html>

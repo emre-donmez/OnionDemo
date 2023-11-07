@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure;
 using Microsoft.AspNetCore.Mvc;
 using OnionDemo.Application.Abstractions.Product;
 using OnionDemo.MVC.Models;
@@ -19,23 +20,11 @@ namespace OnionDemo.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var products = await apiRequestHelper.GetAsync<List<ApiProductGetResponseModel>>(ApiEndpoints.GetProductsEndpoint);
+            var products = await apiRequestHelper.GetAsync<List<ProductViewModel>>(ApiEndpoints.GetProductsEndpoint);
 
-            return View(products);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Action(Guid id)
-        {
-            ProductViewModel productViewModel = new ProductViewModel();
-            if (id != Guid.Empty)
-            {
-               var response = await apiRequestHelper.PostAsync<ApiProductGetResponseModel>(ApiEndpoints.GetProductByIdEndpoint, new {Id=id});
-               productViewModel = this.mapper.Map<ProductViewModel>(response);
-            }
             var categories = await apiRequestHelper.GetAsync<List<ApiCategoryGetResponseModel>>(ApiEndpoints.GetCategoriesEndPoint);
 
-            return View((productViewModel,categories));
+            return View((products, categories));
         }
 
         [HttpPost]

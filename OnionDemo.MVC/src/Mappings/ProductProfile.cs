@@ -8,8 +8,8 @@ namespace OnionDemo.MVC.src.Mappings
     {
         public ProductProfile()
         {
-            CreateMap<ProductDto, ProductViewModel>().ReverseMap();
-            CreateMap<ApiProductGetResponseModel, ProductViewModel>().ReverseMap();
+            this.CreateMap<ProductDto, ProductViewModel>().ReverseMap();
+            this.CreateMap<ApiProductGetResponseModel, ProductViewModel>().ReverseMap();
         }
     }
 }
