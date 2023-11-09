@@ -14,6 +14,8 @@
 
         public const string CategoryEndPoint = BaseEndpoint + "Category/";
         public const string GetCategoriesEndPoint = CategoryEndPoint + "GetCategories";
+        public const string CreateCategoryEndPoint = CategoryEndPoint + "Create";
+        public const string UpdateCategoryEndPoint = CategoryEndPoint + "Update";
 
 
     }

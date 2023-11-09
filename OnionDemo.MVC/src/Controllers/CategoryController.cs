@@ -16,6 +16,8 @@ namespace OnionDemo.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var categories = await apiRequestHelper.GetAsync<List<ApiCategoryGetResponseModel>>(ApiEndpoints.GetCategoriesEndPoint);
+            ViewBag.CreateCategoryEndPoint = ApiEndpoints.CreateCategoryEndPoint;
+            ViewBag.UpdateCategoryEndPoint = ApiEndpoints.UpdateCategoryEndPoint;
             return View(categories);
         }
     }

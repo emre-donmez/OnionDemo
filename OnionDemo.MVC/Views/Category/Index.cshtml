@@ -7,17 +7,11 @@
 </head>
 <body>
     <h1>Category List</h1>
+
     <div class="d-flex justify-content-end">
-        <button class="btn btn-primary mx-2 open-modal" data-modal-id="modal">New Product</button>
-
-        <div id="modal" class="modal">
-            <div class="modal-content">
-                <span class="close" data-modal-id="modal">&times;</span>
-                <partial name="_Action" model="new ApiCategoryGetResponseModel()" />
-            </div>
-        </div>
-
+        <button class="btn btn-primary mx-2 actionBtn">New Product</button>    
     </div>
+
     <table class="table">
         <tr>
             <th>Name</th>
@@ -32,19 +26,56 @@
                 <td>@category.Description</td>
                 <td>@category.Created</td>
                 <td>
-                    <button class="btn btn-primary mx-2 open-modal" data-modal-id="modal-@category.Id">Update</button>
-
-                    <div id="modal-@category.Id" class="modal">
-                        <div class="modal-content">
-                            <span class="close" data-modal-id="modal-@category.Id">&times;</span>
-                            <partial name="_Action" model="category" />
-                        </div>
-                    </div>
-
+                    <button class="btn btn-primary mx-2 actionBtn"
+                            data-id="@category.Id"
+                            data-created="@category.Created"
+                            data-description="@category.Description"
+                            data-name="@category.Name">
+                        Update
+                    </button>    
                 </td>
             </tr>
         }
     </table>
-    <script src="/js/model.js"></script>
+
+    <div id="formModal" class="modal">
+        <div class="modal-content">
+
+            <span class="close">&times;</span>            
+            <h1>Create / Update</h1>
+            <hr />
+            <div class="row">
+                <div class="col-md-4">
+
+                    <input hidden id="Id" />
+                    <input hidden id="Created" />
+                    <input hidden id="Url" />
+                    <input hidden id="UpdateUrl" value="@ViewBag.UpdateCategoryEndPoint" />
+                    <input hidden id="CreateUrl" value="@ViewBag.CreateCategoryEndPoint" />
+
+                    <div class="form-group">
+                        <label class="control-label">Name</label>
+                        <input id="Name" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Description</label>
+                        <input id="Description" class="form-control" />
+                        
+                    </div>
+                    <div class="form-group">
+                        <input type="button" value="Save" class="btn btn-primary my-3" id="btnForm" />
+                    </div>
+
+                </div>
+            </div>
+
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+        @section Scripts{
+            <script src="/js/category.js"></script>
+        }   
 </body>
 </html>
