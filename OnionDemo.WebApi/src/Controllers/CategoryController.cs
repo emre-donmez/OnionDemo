@@ -10,21 +10,20 @@ namespace OnionDemo.WebApi.Controllers
     [ApiController]
     public class CategoryController : Controller
     {
-        private readonly ICategoryService categoryService;
-        private readonly IMapper mapper;
+        private readonly ICategoryService _categoryService;
+        private readonly IMapper _mapper;
 
         public CategoryController(ICategoryService categoryService, IMapper mapper)
         {
-            this.categoryService = categoryService;
-            this.mapper = mapper;
+            _categoryService = categoryService;
+            _mapper = mapper;
         }
-
 
         [HttpGet]
         public async Task<IActionResult> GetCategories()
         {
-            var categories = await categoryService.GetCategories();
-            var model = mapper.Map<List<CategoryResponse>>(categories);
+            var categories = await _categoryService.GetAll();
+            var model = _mapper.Map<List<CategoryResponse>>(categories);
 
             return Ok(model);
         }
@@ -32,8 +31,8 @@ namespace OnionDemo.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CategoryCreateRequest category)
         {
-            var model = this.mapper.Map<CategoryDto>(category);
-            var result = await categoryService.Create(model);
+            var model = _mapper.Map<CategoryDto>(category);
+            var result = await _categoryService.Create(model);
 
             return Ok(result);
         }
@@ -41,8 +40,8 @@ namespace OnionDemo.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Update([FromBody] CategoryUpdateRequest category)
         {
-            var model = this.mapper.Map<CategoryDto>(category);
-            var result = await categoryService.Update(model);
+            var model = _mapper.Map<CategoryDto>(category);
+            var result = await _categoryService.Update(model);
 
             return Ok(result);
         }

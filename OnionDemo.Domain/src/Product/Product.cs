@@ -7,10 +7,10 @@ namespace OnionDemo.Domain
     {
         [ForeignKey("Category")]
         public Guid CategoryId { get; set; }
+
         public Category Category { get; set; }
         public string Name { get; set; }
         public int Price { get; set; }
         public string Description { get; set; }
-
     }
 }

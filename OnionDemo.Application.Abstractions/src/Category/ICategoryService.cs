@@ -1,9 +1,8 @@
-﻿namespace OnionDemo.Application.Abstractions.Category
+﻿using OnionDemo.Application.Abstractions.src.Generic;
+
+namespace OnionDemo.Application.Abstractions.Category
 {
-    public interface ICategoryService
+    public interface ICategoryService : IApplicationCrudService<Domain.Category, CategoryDto>
     {
-        Task<List<CategoryDto>> GetCategories();
-        Task<CategoryDto> Create(CategoryDto category);
-        Task<CategoryDto> Update(CategoryDto category);
     }
 }

@@ -12,7 +12,7 @@ namespace OnionDemo.Persistence.src.Data
             builder.Property(c => c.Id).HasColumnName("PK_CATEGORY");
             builder.Property(c => c.Name).HasColumnName("TX_NAME").HasMaxLength(100).IsFixedLength();
             builder.Property(c => c.Description).HasColumnName("TX_DESCRIPTION");
-            builder.Property(c => c.Created).HasColumnName("DT_CREATED");   
+            builder.Property(c => c.Created).HasColumnName("DT_CREATED");
             builder.Property(c => c.IsDel).HasColumnName("SW_DEL");
         }
     }

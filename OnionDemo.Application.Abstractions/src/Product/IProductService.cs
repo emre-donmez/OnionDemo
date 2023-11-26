@@ -1,14 +1,10 @@
 ﻿using OnionDemo.Application.Abstractions.Product;
+using OnionDemo.Application.Abstractions.src.Generic;
 
 namespace OnionDemo.Application.Abstractions.Services
 {
-    public interface IProductService
+    public interface IProductService : IApplicationCrudService<Domain.Product, ProductDto>
     {
         Task<List<ProductDto>> GetProducts();
-        Task<ProductDto> Create(ProductDto product);
-        Task<ProductDto> Update(ProductDto product);
-        Task<ProductDto> GetProductById(Guid id);
-        Task<ProductDto> Disable(Guid id);
-        Task<ProductDto> Enable(Guid id);
     }
 }

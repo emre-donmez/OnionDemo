@@ -6,16 +6,17 @@ namespace OnionDemo.MVC.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly IApiRequestHelper apiRequestHelper;
+        private readonly IApiRequestHelper _apiRequestHelper;
+
         public CategoryController(IApiRequestHelper apiRequestHelper)
         {
-            this.apiRequestHelper = apiRequestHelper;
+            _apiRequestHelper = apiRequestHelper;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var categories = await apiRequestHelper.GetAsync<List<ApiCategoryGetResponseModel>>(ApiEndpoints.GetCategoriesEndPoint);
+            var categories = await _apiRequestHelper.GetAsync<List<ApiCategoryGetResponseModel>>(ApiEndpoints.GetCategoriesEndPoint);
             ViewBag.CreateCategoryEndPoint = ApiEndpoints.CreateCategoryEndPoint;
             ViewBag.UpdateCategoryEndPoint = ApiEndpoints.UpdateCategoryEndPoint;
             return View(categories);

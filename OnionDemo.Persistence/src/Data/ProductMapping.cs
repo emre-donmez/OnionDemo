@@ -20,7 +20,7 @@ namespace OnionDemo.Persistence.src.Data
             builder.HasOne(p => p.Category)
             .WithMany()
             .HasForeignKey(p => p.CategoryId)
-            .HasConstraintName("FK_Product_Category");         
+            .HasConstraintName("FK_Product_Category");
         }
     }
 }

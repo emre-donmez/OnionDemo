@@ -9,7 +9,7 @@ namespace OnionDemo.WebApi.src.Mappings
     {
         public CategoryProfile()
         {
-            this.CreateMap<CategoryDto,CategoryResponse>().ReverseMap();
+            this.CreateMap<CategoryDto, CategoryResponse>().ReverseMap();
             this.CreateMap<CategoryDto, CategoryCreateRequest>().ReverseMap();
             this.CreateMap<CategoryDto, CategoryUpdateRequest>().ReverseMap();
         }

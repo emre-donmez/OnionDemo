@@ -2,10 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using OnionDemo.Persistence;
 using OnionDemo.Persistence.src.Context.Main;
 
-
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Services.BuildServiceProvider().GetService<IConfiguration>();
-
 
 // Add services to the container.
 
@@ -18,13 +16,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-
-
 builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
 {
     builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
 }));
-
 
 builder.Services.AddDbContext<MainDbContext>(options => options.UseSqlServer(configuration.GetValue<string>("ConnectionStrings:DefaultConnection")));
 
@@ -49,4 +44,3 @@ app.UseCors(options =>
 app.MapControllers();
 
 app.Run();
-

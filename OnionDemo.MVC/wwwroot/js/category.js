@@ -10,7 +10,6 @@ var url = document.getElementById("Url");
 
 actionButtons.forEach(function (button) {
     button.addEventListener("click", function () {
-
         var dataId = this.getAttribute("data-id");
 
         idInput.value = dataId;
@@ -24,7 +23,6 @@ actionButtons.forEach(function (button) {
             url.value = document.getElementById("UpdateUrl").value;
 
         modal.style.display = "block";
-
     });
 });
 
@@ -39,7 +37,6 @@ window.onclick = function (event) {
 }
 
 $('#btnForm').click(function (e) {
-
     e.preventDefault();
 
     var id = $('#Id').val();

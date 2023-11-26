@@ -1,6 +1,4 @@
-﻿using OnionDemo.Application.Abstractions.Product;
-
-namespace OnionDemo.WebApi.Model.Category.Response
+﻿namespace OnionDemo.WebApi.Model.Category.Response
 {
     public class CategoryResponse
     {

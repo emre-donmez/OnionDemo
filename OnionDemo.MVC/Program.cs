@@ -1,4 +1,3 @@
-using AutoMapper.Internal;
 using OnionDemo.MVC.src.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);

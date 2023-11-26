@@ -6,18 +6,18 @@ namespace OnionDemo.MVC.src.Helpers
 {
     public class ApiRequestHelper : IApiRequestHelper
     {
-        private readonly HttpClient client;
+        private readonly HttpClient _client;
 
         public ApiRequestHelper(HttpClient client)
-        {     
+        {
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-            this.client = new HttpClient(clientHandler);
+            _client = new HttpClient(clientHandler);
         }
 
         public async Task<T> GetAsync<T>(string endpoint)
         {
-            HttpResponseMessage response = await this.client.GetAsync(endpoint);
+            HttpResponseMessage response = await _client.GetAsync(endpoint);
 
             if (response.IsSuccessStatusCode)
             {
@@ -33,8 +33,8 @@ namespace OnionDemo.MVC.src.Helpers
         {
             var bodyJson = JsonSerializer.Serialize(data);
             var stringContent = new StringContent(bodyJson, Encoding.UTF8, "application/json");
-           
-            HttpResponseMessage response = await this.client.PostAsync(endpoint, stringContent);
+
+            HttpResponseMessage response = await _client.PostAsync(endpoint, stringContent);
 
             if (response.IsSuccessStatusCode)
             {
