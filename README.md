@@ -17,7 +17,7 @@ Onion Architecture is a design approach that organizes software projects into la
 	- **UI:**  This layer manages user interface interactions. It is independent from other layers and provides data access via web API.
 
 
-# OnionDemo Project
+## OnionDemo Project
 
 OnionDemo is an ASP.NET Core project developed using the Onion architecture. This project is designed with clean code principles and utilizes generic classes. 
 
