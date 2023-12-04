@@ -9,20 +9,20 @@ namespace OnionDemo.Application.Product
 {
     public class ProductService : ApplicationCrudService<Domain.Product, ProductDto>, IProductService
     {
-        private readonly MainDbContext context;
-        private readonly IMapper mapper;
+        private readonly MainDbContext _context;
+        private readonly IMapper _mapper;
 
         public ProductService(MainDbContext context, IMapper mapper) : base(context, mapper)
         {
-            this.context = context;
-            this.mapper = mapper;
+            _context = context;
+            _mapper = mapper;
         }
 
         public Task<List<ProductDto>> GetProducts()
         {
-            var products = this.context.Products.Include(p => p.Category).ToList();
+            var products = _context.Products.Include(p => p.Category).ToList();
 
-            var mappingResult = this.mapper.Map<List<ProductDto>>(products);
+            var mappingResult = _mapper.Map<List<ProductDto>>(products);
 
             return Task.FromResult(mappingResult);
         }
