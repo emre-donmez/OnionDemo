@@ -28,6 +28,8 @@ namespace OnionDemo.Persistence.src.Context.Main
             modelBuilder.Entity<Category>().ToTable("CATEGORY");
 
             OnModelCreatingPartial(modelBuilder);
+
+            new DataSeeder(modelBuilder).Seed();
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

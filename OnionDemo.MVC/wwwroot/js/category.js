@@ -44,17 +44,22 @@ $('#btnForm').click(function (e) {
     var description = $('#Description').val();
     var created = $('#Created').val();
 
-    var parsedDate = created.split(/\s+/);
-    var dateParts = parsedDate[0].split('.');
-    var timeParts = parsedDate[1].split(':');
+    if (created.length > 0) {
+        var parsedDate = created.split(/\s+/);
+        var dateParts = parsedDate[0].split('.');
+        var timeParts = parsedDate[1].split(':');
+
+        created = new Date(dateParts[2], dateParts[1] - 1, dateParts[0], timeParts[0], timeParts[1], timeParts[2]);
+    }
+    
 
     var categoryData = {
         Id: id,
         Name: name,
         Description: description,
-        Created: new Date(dateParts[2], dateParts[1] - 1, dateParts[0], timeParts[0], timeParts[1], timeParts[2])
+        Created: created
     };
-
+ 
     var url = $('#Url').val();
 
     $.ajax({
@@ -65,7 +70,7 @@ $('#btnForm').click(function (e) {
       
 
         success: function (response) {
-            //window.location.reload();
+            window.location.reload();
         },
         error: function (error) {
             console.log(error);

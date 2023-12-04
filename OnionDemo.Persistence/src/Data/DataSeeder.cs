@@ -1,8 +1,10 @@
-﻿using OnionDemo.Domain;
+﻿using Microsoft.EntityFrameworkCore;
+using OnionDemo.Domain;
 using OnionDemo.Persistence.src.Context.Main;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,79 +12,68 @@ namespace OnionDemo.Persistence.src.Data
 {
     public class DataSeeder
     {
-        private readonly MainDbContext _context;
+        private readonly ModelBuilder _modelBuilder;
 
-        public DataSeeder(MainDbContext context)
+        public DataSeeder(ModelBuilder modelBuilder)
         {
-            _context = context;
+            _modelBuilder = modelBuilder;
         }
 
         public void Seed()
         {
-            if (_context.Categories.Any())
-            {
-                var categories = new List<Category>
-                {
-                    new Category
-                    {
-                        Id = Guid.Parse("B1F04949-FB5F-4286-9F2A-2F8B0C06E7DE"),
-                        Name = "Kategori 2",
-                        Description = "Kategori 2 açıklaması.",
-                        Created = DateTime.Parse("2023-11-03 22:05:26.790"),
-                        IsDel = false
-                    },
-                    new Category
-                    {
-                        Id = Guid.Parse("0DE8E949-21F7-45E7-9D4E-536B30072D35"),
-                        Name = "Kategori 5",
-                        Description = "Kategori 5 açıklaması.",
-                        Created = DateTime.Parse("2023-11-03 22:05:26.790"),
-                        IsDel = false
-                    },
-                    new Category
-                    {
-                        Id = Guid.Parse("3D60E3E9-DA05-47A7-9CC5-6FA19995E781"),
-                        Name = "Kategori 3",
-                        Description = "Kategori 3 açıklaması.",
-                        Created = DateTime.Parse("2023-11-03 22:05:26.790"),
-                        IsDel = false
-                    },
-                    new Category
-                    {
-                        Id = Guid.Parse("4A3221B5-2DA5-44B0-AAC4-78B6728A3717"),
-                        Name = "Kategori 4",
-                        Description = "Kategori 4 açıklaması.",
-                        Created = DateTime.Parse("2023-11-03 22:05:26.790"),
-                        IsDel = false
-                    },
-                    new Category
-                    {
-                        Id = Guid.Parse("E4F41D7D-6D47-4B24-9A4F-91E7D7741F28"),
-                        Name = "Kategori 1",
-                        Description = "Kategori 1 açıklaması.",
-                        Created = DateTime.Parse("2023-11-03 22:05:26.790"),
-                        IsDel = false
-                    }
-                };
+            _modelBuilder.Entity<Category>().HasData(
+                  new Category
+                  {
+                      Id = Guid.Parse("B1F04949-FB5F-4286-9F2A-2F8B0C06E7DE"),
+                      Name = "Kategori 2",
+                      Description = "Kategori 2 açıklaması.",
+                      Created = DateTime.Parse("2023-11-03 22:05:26.790"),
+                      IsDel = false
+                  },
+                     new Category
+                     {
+                         Id = Guid.Parse("0DE8E949-21F7-45E7-9D4E-536B30072D35"),
+                         Name = "Kategori 5",
+                         Description = "Kategori 5 açıklaması.",
+                         Created = DateTime.Parse("2023-11-03 22:05:26.790"),
+                         IsDel = false
+                     },
+                     new Category
+                     {
+                         Id = Guid.Parse("3D60E3E9-DA05-47A7-9CC5-6FA19995E781"),
+                         Name = "Kategori 3",
+                         Description = "Kategori 3 açıklaması.",
+                         Created = DateTime.Parse("2023-11-03 22:05:26.790"),
+                         IsDel = false
+                     },
+                     new Category
+                     {
+                         Id = Guid.Parse("4A3221B5-2DA5-44B0-AAC4-78B6728A3717"),
+                         Name = "Kategori 4",
+                         Description = "Kategori 4 açıklaması.",
+                         Created = DateTime.Parse("2023-11-03 22:05:26.790"),
+                         IsDel = false
+                     },
+                     new Category
+                     {
+                         Id = Guid.Parse("E4F41D7D-6D47-4B24-9A4F-91E7D7741F28"),
+                         Name = "Kategori 1",
+                         Description = "Kategori 1 açıklaması.",
+                         Created = DateTime.Parse("2023-11-03 22:05:26.790"),
+                         IsDel = false
+                     });
 
-                _context.Categories.AddRange(categories);
-                _context.SaveChanges();
-            }
-
-            if (!_context.Products.Any())
-            {
-                var products = new List<Product>
+            _modelBuilder.Entity<Product>().HasData(
+                new Product
                 {
-                    new Product
-                    {
-                        Id = Guid.Parse("A696F00D-3A2E-48BF-88BB-1F3F416570FB"),
-                        CategoryId = Guid.Parse("3D60E3E9-DA05-47A7-9CC5-6FA19995E781"),
-                        Name = "Ürün 7",
-                        Price = 80,
-                        Description = "Ürün 7 açıklaması.",
-                        Created = DateTime.Parse("2023-11-03 22:05:26.000"),
-                        IsDel = false
-                    },
+                    Id = Guid.Parse("A696F00D-3A2E-48BF-88BB-1F3F416570FB"),
+                    CategoryId = Guid.Parse("3D60E3E9-DA05-47A7-9CC5-6FA19995E781"),
+                    Name = "Ürün 7",
+                    Price = 80,
+                    Description = "Ürün 7 açıklaması.",
+                    Created = DateTime.Parse("2023-11-03 22:05:26.000"),
+                    IsDel = false
+                },
                     new Product
                     {
                         Id = Guid.Parse("63B179CC-5C4E-44F2-9B9A-49A74416BB80"),
@@ -222,13 +213,7 @@ namespace OnionDemo.Persistence.src.Data
                         Description = "Ürün 6 açıklaması.",
                         Created = DateTime.Parse("2023-11-03 22:05:26.790"),
                         IsDel = false
-                    }
-                };
-
-                _context.Products.AddRange(products);
-                _context.SaveChanges();
-            }
+                    });
         }
-
     }
 }
