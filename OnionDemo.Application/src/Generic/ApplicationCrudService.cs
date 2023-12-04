@@ -55,8 +55,7 @@ namespace OnionDemo.Application.Generic
         {
             var entity = _mapper.Map<TEntity>(dto);
 
-            _context.Update<TEntity>(entity);
-
+            _context.Update(entity);
             _context.SaveChanges();
 
             return Task.FromResult(dto);

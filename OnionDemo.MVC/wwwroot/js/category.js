@@ -44,11 +44,15 @@ $('#btnForm').click(function (e) {
     var description = $('#Description').val();
     var created = $('#Created').val();
 
+    var parsedDate = created.split(/\s+/);
+    var dateParts = parsedDate[0].split('.');
+    var timeParts = parsedDate[1].split(':');
+
     var categoryData = {
         Id: id,
         Name: name,
         Description: description,
-        Created: new Date(created)
+        Created: new Date(dateParts[2], dateParts[1] - 1, dateParts[0], timeParts[0], timeParts[1], timeParts[2])
     };
 
     var url = $('#Url').val();
@@ -58,11 +62,10 @@ $('#btnForm').click(function (e) {
         url: url,
         data: JSON.stringify(categoryData),
         contentType: 'application/json',
-        "crossDomain": true,
-        "Access-Control-Allow-Origin": "*",
+      
 
         success: function (response) {
-            window.location.reload();
+            //window.location.reload();
         },
         error: function (error) {
             console.log(error);
