@@ -2,6 +2,7 @@
 using OnionDemo.Application.Abstractions.src.Generic;
 using OnionDemo.Domain.Entities.Common;
 using OnionDemo.Persistence.src.Context.Main;
+using System.Linq.Expressions;
 
 namespace OnionDemo.Application.Generic
 {
@@ -17,10 +18,15 @@ namespace OnionDemo.Application.Generic
             _mapper = mapper;
         }
 
-        public Task<List<TDto>> GetAll()
+        public Task<List<TDto>> GetAll(Expression<Func<TEntity, bool>> predicate = null, Expression<Func<TEntity,bool>> orderBy = null)
         {
-            var entities = _context.Set<TEntity>().ToList();
-            var dtos = _mapper.Map<List<TDto>>(entities);
+            IQueryable<TEntity> query = _context.Set<TEntity>();
+
+            query = predicate != null ? query.Where(predicate) : query;
+            query = orderBy != null ? query.OrderBy(orderBy) : query;
+
+            var entities = query.ToList();
+            var dtos = _mapper.Map<List<TDto>>(entities.AsQueryable());
 
             return Task.FromResult(dtos);
         }
